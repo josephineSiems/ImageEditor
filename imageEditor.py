@@ -1,6 +1,7 @@
 from PIL import Image, ImageEnhance, ImageFilter
 import os
 import sys
+from pathlib import Path
 
 
 def main():
@@ -27,7 +28,18 @@ def main():
             return None
         
         clean_name = os.path.splitext(filename)[0]
-        edit.save(f'.{pathOut}/{clean_name}_edited.png')
+        counter = 0
+        clean_name_edited = f'{clean_name}_edited.png'
+        print(f".{pathOut}/{clean_name_edited}")
+
+    
+        while(Path(f".{pathOut}/{clean_name_edited}").is_file()):
+            print("hi! " + str(counter))
+            counter += 1
+            clean_name_edited = f'{clean_name}_edited{counter}.png'
+
+
+        edit.save(f'.{pathOut}/{clean_name_edited}')
 
 if __name__ == "__main__":
     main()
